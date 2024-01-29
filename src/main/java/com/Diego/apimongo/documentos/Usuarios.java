@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Getter
 @Setter
 @AllArgsConstructor
-@Document(collation = "Usuarios")
+@Document(collection = "usuarios")
 public class Usuarios {
 
 
@@ -18,10 +18,8 @@ public class Usuarios {
     @Id
     private int id;
 
-    @Field
     private String nombre;
 
-    @Field
     private String email;
 
 }

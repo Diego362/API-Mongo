@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/Usuarios")
@@ -32,6 +32,28 @@ public class UsuariosController {
         try{
             List<Usuarios> usuarios= usuarioRepo.findAll();
             return new ResponseEntity<List<Usuarios>>(usuarios, HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity<String>(e.getCause().toString(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity<?> updateUsuario(@RequestBody Usuarios usuario){
+        try{
+            Usuarios userupdate = usuarioRepo.save(usuario);
+            return new ResponseEntity<Usuarios>(userupdate, HttpStatus.OK);
+        } catch(Exception e) {
+            return new ResponseEntity<String>(e.getCause().toString(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deleteUsuario(@PathVariable("id") Integer id){
+        try{
+            usuarioRepo.deleteById(id);
+            return new ResponseEntity<String>("Este usuario fueue eliminado", HttpStatus.OK);
         } catch(Exception e) {
             return new ResponseEntity<String>(e.getCause().toString(),
                     HttpStatus.INTERNAL_SERVER_ERROR);
