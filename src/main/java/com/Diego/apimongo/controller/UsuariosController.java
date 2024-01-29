@@ -53,7 +53,7 @@ public class UsuariosController {
     public ResponseEntity<?> deleteUsuario(@PathVariable("id") Integer id){
         try{
             usuarioRepo.deleteById(id);
-            return new ResponseEntity<String>("Este usuario fue eliminado", HttpStatus.OK);
+            return new ResponseEntity<String>("Este usuario fue borrado correctamente", HttpStatus.OK);
         } catch(Exception e) {
             return new ResponseEntity<String>(e.getCause().toString(),
                     HttpStatus.INTERNAL_SERVER_ERROR);
